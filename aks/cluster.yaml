@@ -6,8 +6,8 @@ spec:
   id: platform-ref-azure
   parameters:
     nodes:
-      count: 2 #1-100
-      size: small #small/medium/large
+      count: 1 #1-100
+      size: medium #small/medium/large
     services:
       operators:
         prometheus:
