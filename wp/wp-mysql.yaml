@@ -17,7 +17,7 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: 'mysql:8.0.28'
+      - image: mariadb:latest
         imagePullPolicy:
         name: mysql
         env:
