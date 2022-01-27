@@ -17,8 +17,6 @@ spec:
         app: wordpress
         tier: frontend
     spec:
-      # Use the Stork scheduler to enable more efficient placement of the pods
-      schedulerName: stork
       containers:
       - image: wordpress
         name: wordpress
