@@ -16,8 +16,6 @@ spec:
         app: wordpress
         tier: mysql
     spec:
-      # Use the Stork scheduler to enable more efficient placement of the pods
-      schedulerName: stork
       containers:
       - image: mysql:5.6
         imagePullPolicy:
