@@ -17,7 +17,7 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: mysql:latest
+      - image: 'mysql:8.0.28'
         imagePullPolicy:
         name: mysql
         env:
