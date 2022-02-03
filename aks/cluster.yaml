@@ -1,13 +1,13 @@
 apiVersion: azure.platformref.crossplane.io/v1alpha1
 kind: Cluster
 metadata:
-  name: platform-ref-azure
+  name: nate-platform-ref-azure
 spec:
-  id: platform-ref-azure
+  id: nate-platform-ref-azure
   parameters:
     nodes:
       count: 1 #1-100
-      size: medium #small/medium/large
+      size: small #small/medium/large
     services:
       operators:
         prometheus:
