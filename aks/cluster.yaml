@@ -1,5 +1,5 @@
 apiVersion: azure.platformref.crossplane.io/v1alpha1
-kind: XCluster
+kind: Cluster
 metadata:
   name: nate-platform-ref-azure
 spec:
