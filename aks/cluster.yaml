@@ -14,3 +14,4 @@ spec:
           version: "15.0.1"
   writeConnectionSecretToRef:
     name: platform-ref-azure-kubeconfig #Must be unique for each instance
+    namespace: default
