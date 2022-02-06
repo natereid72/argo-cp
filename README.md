@@ -5,5 +5,7 @@
 
 In a production model, these two directories would reside in separate repositories.
 
+[Blog post that provides some background on this repo](https://vrelevant.net/crossplane-and-gitops-lets-get-to-the-good-stuff/)
+
 _Prior to using this repository, you will need a K8s cluster with Crossplane and Argo CD installed. You will also need to create a ProviderConfig and a secret for the provider to authenticate to your Azure tenant. Directions for all of this are available at Argo CD and Upbound docs. For a fully relaized GitOps model, we could add something like SealedSecrets to also inlcude the ProviderConfig and Secret within the repo._
 
