@@ -1,3 +1,4 @@
+
 apiVersion: azure.platformref.crossplane.io/v1alpha1
 kind: XCluster
 metadata:

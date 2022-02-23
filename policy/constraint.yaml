@@ -2,6 +2,9 @@ apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: clusterNodeSize
 metadata:
   name: dev-clusternodesize
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   match:
     namespaces:

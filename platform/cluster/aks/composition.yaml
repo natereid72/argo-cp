@@ -2,6 +2,9 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
   name: xaks.azure.platformref.crossplane.io
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "3"
   labels:
     provider: azure
 spec:
@@ -14,8 +17,10 @@ spec:
         kind: AKSCluster
         spec:
           location: West US 2
-          version: "1.21.2"
+          version: "1.23.3"
       patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
         - fromFieldPath: spec.id
           toFieldPath: metadata.name
           transforms:
@@ -63,6 +68,8 @@ spec:
             secretRef:
               key: kubeconfig
       patches:
+        - fromFieldPath: metadata.labels
+          toFieldPath: metadata.labels
         - fromFieldPath: spec.id
           toFieldPath: metadata.name
         - fromFieldPath: spec.writeConnectionSecretToRef.namespace

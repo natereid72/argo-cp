@@ -2,6 +2,8 @@ apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: crossplane-provider-azure
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
 spec:
   ignoreCrossplaneConstraints: false
   package: registry.upbound.io/crossplane/provider-azure:v0.18.1
