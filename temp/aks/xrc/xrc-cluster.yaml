@@ -1,17 +1,16 @@
 apiVersion: azure.platformref.crossplane.io/v1alpha1
-kind: XCluster
+kind: Cluster
 metadata:
-  name: nate-platform-ref-azure
+  name: platform-ref-azure
 spec:
   id: nate-platform-ref-azure
   parameters:
     nodes:
       count: 1 #1-100
-      size: medium #small/medium/large
+      size: small #small/medium/large
     services:
       operators:
         prometheus:
           version: "15.0.1"
   writeConnectionSecretToRef:
     name: platform-ref-azure-kubeconfig #Must be unique for each instance
-    namespace: default

@@ -1,0 +1,24 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: clusternodesize
+spec:
+  crd:
+    spec:
+      names:
+        kind: clusterNodeSize
+      validation:
+        openAPIV3Schema:
+          properties:
+            size:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package clusternodesize
+        violation[{"msg": msg,  "details": {}}] { 
+          input.review.operation = "CREATE"
+          size := input.review.object.spec.parameters.nodes.size
+          size != input.parameters.size
+          msg = sprintf("Node size %s is larger than limit of %s", [size, input.parameters.size])
+        }

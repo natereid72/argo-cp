@@ -1,0 +1,13 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: clusterNodeSize
+metadata:
+  name: dev-clusternodesize
+spec:
+  match:
+    namespaces:
+      - dev
+    kinds:
+      - apiGroups: ["azure.platformref.crossplane.io"]
+        kinds: ["Cluster"]
+  parameters:
+    size: small

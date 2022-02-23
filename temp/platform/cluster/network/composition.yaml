@@ -1,0 +1,83 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xnetworks.azure.platformref.crossplane.io
+  labels:
+    provider: azure
+spec:
+  compositeTypeRef:
+    apiVersion: azure.platformref.crossplane.io/v1alpha1
+    kind: XNetwork
+  resources:
+  - base:
+      apiVersion: azure.crossplane.io/v1alpha3
+      kind: ResourceGroup
+      spec:
+        location: West US 3
+    patches:
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.name
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-rg"
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.annotations[crossplane.io/external-name]
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-rg"
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.labels[azure.platformref.crossplane.io/app]
+  - base:
+      apiVersion: network.azure.crossplane.io/v1alpha3
+      kind: VirtualNetwork
+      spec:
+        resourceGroupNameSelector:
+          matchControllerRef: true
+        location: West US 2
+        properties:
+          addressSpace:
+            addressPrefixes: ['192.168.0.0/16']
+    patches:
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.labels[app]
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.name
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-vnet"
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.annotations[crossplane.io/external-name]
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-vnet"
+  - base:
+      apiVersion: network.azure.crossplane.io/v1alpha3
+      kind: Subnet
+      spec:
+        resourceGroupNameSelector:
+          matchControllerRef: true
+        virtualNetworkNameSelector:
+          matchControllerRef: true
+        properties:
+          addressPrefix: '192.168.1.0/24'
+          serviceEndpoints:
+            - service: Microsoft.Sql
+    patches:
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.labels[azure.platformref.crossplane.io/app]
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.name
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-sn"
+      - fromFieldPath: spec.id
+        toFieldPath: metadata.annotations[crossplane.io/external-name]
+        transforms:
+          - type: string
+            string:
+              fmt: "%s-sn"
