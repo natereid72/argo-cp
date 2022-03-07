@@ -1,0 +1,16 @@
+project: default
+source:
+  repoURL: 'https://github.com/natereid72/argo-cp.git'
+  path: argoapps
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: argocd
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+    - Validate=false
+    - CreateNamespace=true
+    - ApplyOutOfSyncOnly=true
