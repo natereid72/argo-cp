@@ -1,4 +1,10 @@
-project: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argoapps
+  namespace: 
+  argocdproject: default
 source:
   repoURL: 'https://github.com/natereid72/argo-cp.git'
   path: argoapps
